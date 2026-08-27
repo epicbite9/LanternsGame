@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanterns of the Eternal Kingdom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen">
+            <div class="loader"></div>
+            <p>Illuminating the Path...</p>
+        </div>
 
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen hidden">
+            <div class="menu-overlay">
+                <h1 class="game-title">Lanterns of the <br><span class="highlight">Eternal Kingdom</span></h1>
+                <div class="menu-options">
+                    <button onclick="game.startNewGame()">New Journey</button>
+                    <button onclick="ui.toggleMenu('saves-menu')">Continue</button>
+                    <button onclick="ui.toggleMenu('settings-menu')">Settings</button>
+                    <button onclick="ui.toggleMenu('credits-screen')">Credits</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Layer -->
+        <div id="game-view" class="screen hidden">
+            <div id="background-layer"></div>
+            <div id="character-layer">
+                <div id="char-left" class="character-slot"></div>
+                <div id="char-right" class="character-slot"></div>
+            </div>
+            
+            <div id="ui-layer">
+                <div id="choice-container" class="hidden"></div>
+                
+                <div id="dialogue-box">
+                    <div id="speaker-name"></div>
+                    <div id="dialogue-text"></div>
+                    <div id="click-indicator">▼</div>
+                    <div class="dialogue-controls">
+                        <button onclick="ui.toggleHistory()">History</button>
+                        <button onclick="game.skip()">Skip</button>
+                        <button onclick="ui.toggleMenu('saves-menu')">Save/Load</button>
+                        <button onclick="ui.toggleMenu('settings-menu')">Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals/Menus -->
+        <div id="saves-menu" class="modal hidden">
+            <div class="modal-content">
+                <h2>Chronicles</h2>
+                <div id="save-slots"></div>
+                <button class="close-btn" onclick="ui.toggleMenu('saves-menu')">Back</button>
+            </div>
+        </div>
+
+        <div id="settings-menu" class="modal hidden">
+            <div class="modal-content">
+                <h2>Settings</h2>
+                <div class="setting-item">
+                    <label>Text Speed</label>
+                    <input type="range" id="text-speed" min="10" max="100" value="40">
+                </div>
+                <div class="setting-item">
+                    <label>Music Volume</label>
+                    <input type="range" id="bgm-volume" min="0" max="100" value="50">
+                </div>
+                <button class="close-btn" onclick="ui.toggleMenu('settings-menu')">Back</button>
+            </div>
+        </div>
+
+        <div id="credits-screen" class="modal hidden">
+            <div class="modal-content">
+                <h2>Credits</h2>
+                <p>Story & Game Design: Expert Narrative Designer</p>
+                <p>Engine: Vanilla JS Cinematic VN Engine</p>
+                <p>Art: Cinematic Fantasy AI Guidelines Included</p>
+                <p>Music: Original Thematic Moods</p>
+                <button class="close-btn" onclick="ui.toggleMenu('credits-screen')">Back</button>
+            </div>
+        </div>
+
+        <!-- History Log -->
+        <div id="history-log" class="modal hidden">
+            <div class="modal-content">
+                <h2>Dialogue History</h2>
+                <div id="history-content"></div>
+                <button class="close-btn" onclick="ui.toggleHistory()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
