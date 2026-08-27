@@ -1,1 +1,217 @@
+:root {
+    --bg-dark: #071426;
+    --royal-blue: #102B3F;
+    --emerald: #174A45;
+    --crimson: #751F32;
+    --gold: #D6A84F;
+    --ivory: #F4E7C1;
+    --dialogue-bg: rgba(7, 20, 38, 0.85);
+    --transition-speed: 0.8s;
+}
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--ivory);
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    background: #000;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: opacity var(--transition-speed);
+}
+
+.hidden { display: none !important; }
+
+/* Main Menu */
+#main-menu {
+    background: radial-gradient(circle, var(--royal-blue) 0%, var(--bg-dark) 100%);
+    justify-content: center;
+    align-items: center;
+}
+
+.game-title {
+    font-size: 4rem;
+    text-align: center;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(214, 168, 79, 0.5);
+    margin-bottom: 3rem;
+}
+
+.highlight { color: var(--ivory); font-style: italic; }
+
+.menu-options button {
+    display: block;
+    width: 250px;
+    padding: 15px;
+    margin: 10px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-options button:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+}
+
+/* Gameplay UI */
+#background-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+}
+
+#character-layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.character-slot {
+    width: 40%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+#dialogue-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    min-height: 180px;
+    background: var(--dialogue-bg);
+    border: 2px solid var(--gold);
+    padding: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#speaker-name {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background: var(--crimson);
+    padding: 5px 25px;
+    color: var(--gold);
+    font-weight: bold;
+    border: 1px solid var(--gold);
+}
+
+#dialogue-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+#choice-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.choice-btn {
+    background: rgba(16, 43, 63, 0.9);
+    border: 1px solid var(--gold);
+    color: var(--ivory);
+    padding: 15px 40px;
+    width: 400px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: 0.2s;
+}
+
+.choice-btn:hover { background: var(--gold); color: var(--bg-dark); }
+
+/* Modals */
+.modal {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-content {
+    background: var(--royal-blue);
+    border: 2px solid var(--gold);
+    padding: 40px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--crimson);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn 1s; }
+
+#click-indicator {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: var(--gold);
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@media (max-width: 768px) {
+    .game-title { font-size: 2.5rem; }
+    .choice-btn { width: 90%; }
+    #dialogue-text { font-size: 1.1rem; }
+}
